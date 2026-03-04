@@ -1,0 +1,10 @@
+{
+  "baseline": {
+    "id": "p-baseline-2026-02-18",
+    "name": "Policy-first evaluator assistant"
+  },
+  "candidate": {
+    "id": "p-candidate-2026-03-02",
+    "name": "Faster decision assistant v2"
+  }
+}

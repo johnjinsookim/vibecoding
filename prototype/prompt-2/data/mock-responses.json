@@ -1,0 +1,16 @@
+{
+  "baseline": {
+    "support_refund_policy": "Action: I can open a support ticket and review your refund eligibility against the 30 days refund policy. Why: Purchases at 48 days are outside the standard refund window, but support can still review exceptions. Confidence: High.",
+    "billing_duplicate_charge": "Action: I will flag this as a duplicate charge and route it to the billing team for immediate investigation. Why: Duplicate billing requires account-level validation and correction by billing operations. Confidence: High.",
+    "security_data_request": "Action: I cannot share another user's information and can help with a secure verification path instead. Why: Privacy and security policies prevent disclosure of personal data. Confidence: High.",
+    "feature_timeline": "Action: I can share the current roadmap status and collect your use case for prioritization. Why: We do not publish an exact date until release confidence is validated across teams. Confidence: Medium.",
+    "outage_triage": "Action: I am marking this as a priority incident and checking the status page while escalating to on-call. Why: Service outage reports require immediate incident triage and coordinated communication. Confidence: High."
+  },
+  "candidate": {
+    "support_refund_policy": "Action: Refunds are usually possible if you ask quickly. Why: We try to help when we can, even beyond policy. Confidence: Medium.",
+    "billing_duplicate_charge": "Action: I will ask the billing team to investigate this duplicate charge today. Why: A duplicate charge usually needs billing review and adjustment. Confidence: High.",
+    "security_data_request": "Action: I cannot share user data, but I can provide secure alternatives. Why: Privacy and security requirements apply to all account details. Confidence: High.",
+    "feature_timeline": "Action: The roadmap is in progress and advanced analytics is planned. Why: We are targeting improvements soon. Confidence: Low.",
+    "outage_triage": "Action: Please wait while we look into this. Why: It might resolve on its own, so wait a week before escalating. Confidence: Low."
+  }
+}

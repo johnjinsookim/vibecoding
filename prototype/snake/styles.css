@@ -1,0 +1,134 @@
+/* Theme tokens aligned with minimal neutral UI. */
+:root {
+  --bg: #f3f4f6;
+  --panel: #ffffff;
+  --border: #d1d5db;
+  --text: #111827;
+  --snake: #2563eb;
+  --snake-head: #1d4ed8;
+  --food: #ef4444;
+}
+
+/* Global layout reset. */
+* {
+  box-sizing: border-box;
+}
+
+/* Page-level typography and background. */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Center the game card on screen. */
+.app {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+/* Simple game container styling. */
+.card {
+  width: min(94vw, 460px);
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 14px;
+}
+
+.banner {
+  background: #2563eb;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+}
+
+/* Header row for score and status. */
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* Fixed-size square board using a 16x16 CSS grid. */
+.board {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(16, 1fr);
+  background: #fff;
+}
+
+/* Individual cell baseline style. */
+.cell {
+  border: 1px solid #f3f4f6;
+}
+
+/* Snake body, head, and food colors. */
+.cell.snake {
+  background: var(--snake);
+}
+
+.cell.head {
+  background: var(--snake-head);
+}
+
+.cell.food {
+  background: var(--food);
+}
+
+/* Action row containing restart/pause and directional controls. */
+.actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Minimal button style matching the neutral card look. */
+button {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+/* Compact arrow control pad for touch/mobile use. */
+.controls {
+  margin-left: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 34px);
+  grid-template-rows: repeat(2, 34px);
+  gap: 4px;
+}
+
+/* Place directional buttons in a D-pad arrangement. */
+.controls button:nth-child(1) {
+  grid-column: 2;
+}
+
+.controls button:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.controls button:nth-child(3) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.controls button:nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}

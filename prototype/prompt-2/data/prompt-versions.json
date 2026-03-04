@@ -1,0 +1,12 @@
+{
+  "baseline": {
+    "id": "v1-stable",
+    "name": "Stable Support Assistant",
+    "description": "Policy-first response template with structured output."
+  },
+  "candidate": {
+    "id": "v2-fast-rewrite",
+    "name": "Fast Rewrite Candidate",
+    "description": "Shorter response style with looser policy language."
+  }
+}

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Basic metadata and stylesheet include. -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Snake</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Main game shell. -->
+    <main class="app">
+      <section class="card">
+        <div class="banner">THEO'S SNAKE GAME</div>
+        <!-- Score/status header. -->
+        <header class="top">
+          <div>Score: <strong id="score">0</strong></div>
+          <div id="status">Running</div>
+        </header>
+        <!-- Grid render target. -->
+        <div id="board" class="board" aria-label="Snake board"></div>
+        <!-- Core action controls and touch directions. -->
+        <div class="actions">
+          <button id="restart" type="button">Restart</button>
+          <button id="pause" type="button">Pause</button>
+          <div class="controls" aria-label="On-screen controls">
+            <button type="button" data-dir="UP">↑</button>
+            <button type="button" data-dir="LEFT">←</button>
+            <button type="button" data-dir="DOWN">↓</button>
+            <button type="button" data-dir="RIGHT">→</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- Game runtime script. -->
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

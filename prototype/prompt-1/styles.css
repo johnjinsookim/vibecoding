@@ -1,0 +1,211 @@
+:root {
+  --bg: #f4f6f9;
+  --surface: #ffffff;
+  --text: #1d2433;
+  --muted: #5a647a;
+  --border: #d8deea;
+  --pass: #1e9b5a;
+  --fail: #c03636;
+  --brand: #0b66d1;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #e9effb 0, var(--bg) 45%);
+  color: var(--text);
+}
+
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0 0 10px;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.builder-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.row-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.summary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.metric-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.metric-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.metric-value {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.btn {
+  border: 1px solid var(--border);
+  background: #f8faff;
+  color: var(--text);
+  border-radius: 7px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.btn.primary {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+.btn.active {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.status-pill {
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid var(--border);
+}
+
+.status-pass {
+  color: var(--pass);
+  border-color: color-mix(in srgb, var(--pass) 35%, white);
+  background: color-mix(in srgb, var(--pass) 10%, white);
+}
+
+.status-fail {
+  color: var(--fail);
+  border-color: color-mix(in srgb, var(--fail) 35%, white);
+  background: color-mix(in srgb, var(--fail) 10%, white);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+th,
+td {
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  text-align: left;
+}
+
+tbody tr {
+  cursor: pointer;
+}
+
+tbody tr.regression {
+  background: #fff5f5;
+}
+
+.delta-negative {
+  color: var(--fail);
+  font-weight: 700;
+}
+
+.delta-positive {
+  color: var(--pass);
+  font-weight: 700;
+}
+
+.pill {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.pill-pass {
+  background: #ebf8f0;
+  color: #147a45;
+}
+
+.pill-fail {
+  background: #fdecec;
+  color: #a92929;
+}
+
+pre {
+  white-space: pre-wrap;
+  background: #f6f8fc;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px;
+  margin: 0;
+}
+
+.detail-card {
+  margin-bottom: 10px;
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding: 12px;
+  }
+}

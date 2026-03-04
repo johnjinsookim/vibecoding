@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt Regression Review</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Azure AI Foundry</p>
+          <h1>Prompt Regression Evaluation</h1>
+          <p id="versionLine" class="muted">Loading prompt versions...</p>
+        </div>
+        <div id="statusBadge" class="status-badge">Loading</div>
+      </header>
+
+      <section class="metrics" id="metrics"></section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Case Results</h2>
+          <div class="controls">
+            <button id="showAllBtn" class="active">All Cases</button>
+            <button id="showRegressionsBtn">Regressions Only</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Case</th>
+                <th>Baseline</th>
+                <th>Candidate</th>
+                <th>Delta</th>
+                <th>Regression</th>
+                <th>Reasons</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel" id="detailsPanel">
+        <h2>Selected Case Detail</h2>
+        <p class="muted">Click a row to inspect baseline and candidate output.</p>
+        <div id="detailsContent" class="detail-grid"></div>
+      </section>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

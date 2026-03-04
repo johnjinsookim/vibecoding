@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt-1 | Pre-Production Evaluator</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="panel header">
+        <h1>Prompt-1 Pre-Production Evaluator</h1>
+        <p class="muted">Hybrid evaluator builder, deterministic gate results, and compliance-ready report review.</p>
+      </header>
+
+      <section class="panel">
+        <h2>Hybrid Evaluator Builder</h2>
+        <p class="muted">At least one evaluator from each mode is required for a valid run profile.</p>
+        <div class="builder-grid">
+          <div>
+            <h3>Template</h3>
+            <label><input type="checkbox" data-mode="template" value="policy-template-v1" checked /> policy-template-v1</label>
+            <label><input type="checkbox" data-mode="template" value="schema-template-v1" /> schema-template-v1</label>
+          </div>
+          <div>
+            <h3>Generated</h3>
+            <label><input type="checkbox" data-mode="generated" value="runtime-check-v1" checked /> runtime-check-v1</label>
+            <label><input type="checkbox" data-mode="generated" value="edge-case-generator-v1" /> edge-case-generator-v1</label>
+          </div>
+          <div>
+            <h3>Custom</h3>
+            <label><input type="checkbox" data-mode="custom" value="enterprise-risk-rule-v1" checked /> enterprise-risk-rule-v1</label>
+            <label><input type="checkbox" data-mode="custom" value="raI-signoff-rule-v1" /> rai-signoff-rule-v1</label>
+          </div>
+        </div>
+        <div class="row-actions">
+          <button id="validateProfileBtn" class="btn">Validate Profile</button>
+          <button id="saveProfileBtn" class="btn">Save Reusable Profile</button>
+          <span id="profileMessage" class="muted"></span>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="summary-head">
+          <h2>Gate Summary</h2>
+          <span id="statusBadge" class="status-pill">-</span>
+        </div>
+        <p id="versionLine" class="muted"></p>
+        <div id="metrics" class="metrics"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Run-Level Recommendations</h2>
+        <p id="problemSummary"></p>
+        <ol id="actionSteps"></ol>
+      </section>
+
+      <section class="panel">
+        <div class="summary-head">
+          <h2>Case Results</h2>
+          <div>
+            <button id="showAllBtn" class="btn active">All Cases</button>
+            <button id="showRegressionsBtn" class="btn">Regressions Only</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Case</th>
+                <th>Baseline</th>
+                <th>Candidate</th>
+                <th>Delta</th>
+                <th>Status</th>
+                <th>Reasons</th>
+              </tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Case Detail + Root Cause</h2>
+        <div id="detailsContent"></div>
+      </section>
+
+      <section class="panel">
+        <button id="downloadReportBtn" class="btn primary">Download JSON Report</button>
+      </section>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
