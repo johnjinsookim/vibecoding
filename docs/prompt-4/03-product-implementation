@@ -1,0 +1,80 @@
+# Product Implementation Plan
+
+> Source: `docs/prompt-4/02-product-requirements.md`
+> Focus: Feature 2 - Evaluators (Online Risk Evaluation Engine)
+
+## 1. Implementation Objective
+Implement a production-ready evaluator pipeline that runs synchronously before recommendation display, produces deterministic risk outputs, and emits traceable observability events for policy gating and debugging.
+
+## 2. Delivery Phases
+
+### Phase 0: Contracts and Readiness
+1. Freeze evaluator I/O schema:
+   - Request: `recommendation_text`, `source_context`, `request_metadata`.
+   - Per-evaluator output and aggregate output contracts from PRD Feature 2 prototype.
+2. Define stable reason code taxonomy with versioning (`threshold_version`, `reason_codes`).
+3. Create test fixtures for safe, unsafe, and ambiguous recommendation samples.
+4. Define SLOs and gates:
+   - P95 evaluator latency <800ms.
+   - 100% event trace correlation.
+
+### Phase 1: Evaluator Runtime
+1. Build an `EvaluatorOrchestrator` that:
+   - Runs evaluator modules in parallel.
+   - Enforces per-evaluator timeout budgets.
+   - Captures latency and failure state per evaluator.
+2. Implement evaluator adapters:
+   - `factuality_evaluator`
+   - `pii_compliance_evaluator`
+   - `governance_evaluator`
+   - `harmful_content_evaluator`
+3. Implement aggregate risk computation and deterministic `policy_signal` output.
+4. Add degraded-mode logic:
+   - timeout handling
+   - partial failure handling
+   - hard failure default action
+
+### Phase 2: Policy and Observability Integration
+1. Expose aggregate evaluator result to pre-display policy gating API.
+2. Emit structured observability events for:
+   - per-evaluator output
+   - aggregate output
+   - runtime errors and degraded paths
+3. Add trace correlation (`trace_id`, request ID) across all evaluator events.
+4. Build dashboards and queries for:
+   - evaluator failure rate
+   - reason code distribution
+   - latency by evaluator and service
+
+### Phase 3: Verification and Rollout
+1. Add automated tests:
+   - unit tests for evaluator adapters and aggregator
+   - contract tests for event schema
+   - integration tests for policy signal handoff
+2. Execute offline replay against historical incidents to validate recall and false positives.
+3. Run staged rollout:
+   - canary in low-volume service
+   - progressive traffic ramp with guardrails
+4. Establish runbooks for on-call:
+   - evaluator timeout spikes
+   - elevated false positives
+   - missing trace correlation
+
+## 3. Task Breakdown (Engineering Checklist)
+1. Create module skeletons (`orchestrator`, `evaluators`, `contracts`, `telemetry`).
+2. Implement schema validation at runtime boundaries.
+3. Implement parallel execution + cancellation/timeout handling.
+4. Add reason code mapper and versioned thresholds.
+5. Wire policy signal payload into gating service.
+6. Wire telemetry sink to Foundry observability.
+7. Add test suite and CI checks for schema compatibility.
+8. Add feature flag for evaluator pipeline enablement by service.
+9. Add rollout dashboard with P95 latency and fail-open/fail-closed counts.
+10. Perform production readiness review and signoff.
+
+## 4. Exit Criteria
+1. Feature flag enabled for at least one production service without SLO breach for 7 consecutive days.
+2. P95 evaluator pipeline latency remains below 800ms.
+3. 100% evaluator events include trace correlation fields.
+4. Policy signal is present and valid for 100% of evaluated requests.
+5. On-call playbook exercised in at least one game-day simulation.

@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt-3 | Agent Eval Multi-Screen Prototype</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="brand">LangSmith</div>
+        <nav class="nav-group">
+          <p class="nav-title">Evaluation</p>
+          <a class="nav-item active" href="#">Datasets & Experiments</a>
+          <a class="nav-item" href="#">Annotation Queues</a>
+          <a class="nav-item" href="#">Prompts</a>
+          <a class="nav-item" href="#">Playground</a>
+        </nav>
+      </aside>
+
+      <div class="main-shell">
+        <header class="global-header">
+          <div>
+            <p class="eyebrow">Prompt-3 Prototype</p>
+            <h1>Agent Evaluation Workbench</h1>
+            <p id="globalMeta" class="muted">Loading...</p>
+          </div>
+
+          <div class="flow-controls">
+            <div class="stepper" id="stepper">
+              <button class="step-btn" data-screen="select">1. Select Evaluator</button>
+              <button class="step-btn" data-screen="define">2. Define Custom Evaluator</button>
+              <button class="step-btn" data-screen="results">3. Results by Experiment</button>
+              <button class="step-btn" data-screen="analyze">4. Deep-dive Results</button>
+            </div>
+            <div class="nav-buttons">
+              <button id="navPrev" class="btn">Back</button>
+              <button id="navNext" class="btn btn-primary">Next</button>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <section id="screen-select" class="screen">
+            <div class="screen-header">
+              <div class="screen-title">
+                <h2>Select Evaluator</h2>
+                <a class="source-link" target="_blank" rel="noopener noreferrer" href="https://www.figma.com/board/XQxFddvpqaINJUHoJfA443/Eval-Mood-Board?node-id=22-267&t=1qrht0zX72loIKcs-1">FigJam screenshot (node 22:267)</a>
+              </div>
+              <span id="selectedEvaluatorBadge" class="badge">Evaluator: -</span>
+            </div>
+
+            <div class="screen-grid screen-grid-select">
+              <article class="panel">
+                <div class="panel-toolbar">
+                  <input id="selectSearch" type="text" placeholder="Search experiments..." />
+                  <button class="btn btn-chip">Charts</button>
+                  <button class="btn btn-chip">Filters</button>
+                </div>
+
+                <div id="selectCharts" class="chart-row"></div>
+
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Experiment</th>
+                        <th>Selected Evaluator</th>
+                        <th>Correctness</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody id="selectExperimentRows"></tbody>
+                  </table>
+                </div>
+
+                <div class="panel-actions">
+                  <button id="selectContinueBtn" class="btn btn-primary">Continue to Define</button>
+                </div>
+              </article>
+
+              <article class="panel">
+                <div class="screen-header mini">
+                  <h3>Evaluators</h3>
+                  <span id="evaluatorCount" class="badge">0</span>
+                </div>
+                <p class="muted small">Choose a current evaluator or create your own.</p>
+                <div id="evaluatorMenu" class="menu-list"></div>
+                <div class="panel-actions">
+                  <button id="createOwnEvaluatorBtn" class="btn">Create your own</button>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section id="screen-define" class="screen hidden">
+            <div class="screen-header">
+              <div class="screen-title">
+                <h2>Define Custom Evaluator</h2>
+                <a class="source-link" target="_blank" rel="noopener noreferrer" href="https://www.figma.com/board/XQxFddvpqaINJUHoJfA443/Eval-Mood-Board?node-id=22-268&t=1qrht0zX72loIKcs-1">FigJam screenshot (node 22:268)</a>
+              </div>
+              <span id="defineModeBadge" class="badge">Mode: New</span>
+            </div>
+
+            <div class="screen-grid screen-grid-define">
+              <article class="panel">
+                <form id="defineForm" class="form-grid">
+                  <label>
+                    Evaluator Name
+                    <input id="defineName" name="name" type="text" required />
+                  </label>
+
+                  <label>
+                    Category
+                    <select id="defineCategory" name="category">
+                      <option value="quality">Quality</option>
+                      <option value="safety">Safety</option>
+                      <option value="compliance">Compliance</option>
+                      <option value="latency">Latency</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Model
+                    <select id="defineModel" name="model">
+                      <option value="OpenAI gpt-4.1-mini">OpenAI gpt-4.1-mini</option>
+                      <option value="OpenAI gpt-4.1">OpenAI gpt-4.1</option>
+                      <option value="OpenAI gpt-4o-mini">OpenAI gpt-4o-mini</option>
+                    </select>
+                  </label>
+
+                  <label>
+                    Pass Threshold
+                    <input id="defineThreshold" name="threshold" type="number" min="0" max="1" step="0.01" value="0.8" required />
+                  </label>
+
+                  <label class="full-width">
+                    Prompt + Rubric
+                    <textarea id="defineRubric" name="rubric" rows="10" required></textarea>
+                  </label>
+
+                  <p id="defineMessage" class="muted"></p>
+
+                  <div class="panel-actions full-width">
+                    <button type="button" id="defineDeleteBtn" class="btn btn-danger">Delete Evaluator</button>
+                    <button type="button" id="defineDiscardBtn" class="btn">Discard Changes</button>
+                    <button type="submit" id="defineSaveBtn" class="btn btn-primary">Save Evaluator</button>
+                  </div>
+                </form>
+              </article>
+
+              <article class="panel">
+                <h3>Example</h3>
+                <p class="muted small">Map prompt variables to your dataset sample.</p>
+                <h4>Input</h4>
+                <pre id="exampleInput">-</pre>
+                <h4>Reference Output</h4>
+                <pre id="exampleReference">-</pre>
+                <h4>Current Output</h4>
+                <pre id="exampleOutput">-</pre>
+              </article>
+            </div>
+          </section>
+
+          <section id="screen-results" class="screen hidden">
+            <div class="screen-header">
+              <div class="screen-title">
+                <h2>See Results of Evaluation by Experiment</h2>
+                <a class="source-link" target="_blank" rel="noopener noreferrer" href="https://www.figma.com/board/XQxFddvpqaINJUHoJfA443/Eval-Mood-Board?node-id=22-269&t=1qrht0zX72loIKcs-1">FigJam screenshot (node 22:269)</a>
+              </div>
+              <span id="resultsBadge" class="badge">Evaluator: -</span>
+            </div>
+
+            <article class="panel">
+              <div id="resultsCharts" class="chart-row"></div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Experiment</th>
+                      <th>Conciseness</th>
+                      <th>Correctness</th>
+                      <th>Simplicity</th>
+                      <th>Selected Score</th>
+                      <th>Created At</th>
+                    </tr>
+                  </thead>
+                  <tbody id="resultsRows"></tbody>
+                </table>
+              </div>
+
+              <div class="panel-actions">
+                <button id="resultsAnalyzeBtn" class="btn btn-primary">Analyze Selected Experiment</button>
+              </div>
+            </article>
+          </section>
+
+          <section id="screen-analyze" class="screen hidden">
+            <div class="screen-header">
+              <div class="screen-title">
+                <h2>Deep-dive into Experimental Results</h2>
+                <a class="source-link" target="_blank" rel="noopener noreferrer" href="https://www.figma.com/board/XQxFddvpqaINJUHoJfA443/Eval-Mood-Board?node-id=22-270&t=1qrht0zX72loIKcs-1">FigJam screenshot (node 22:270)</a>
+              </div>
+              <span id="analyzeBadge" class="badge">Experiment: -</span>
+            </div>
+
+            <article class="panel">
+              <div class="panel-toolbar">
+                <button class="btn btn-chip active-chip">Compact</button>
+                <button class="btn btn-chip">Full</button>
+                <button class="btn btn-chip">JSON</button>
+                <button class="btn btn-chip">Heat Map</button>
+              </div>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Inputs</th>
+                      <th>Reference Outputs</th>
+                      <th>Outputs</th>
+                      <th>Conciseness</th>
+                      <th>Correctness</th>
+                      <th>Simplicity</th>
+                    </tr>
+                  </thead>
+                  <tbody id="analyzeRows"></tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="panel">
+              <h3 id="analyzeCaseTitle">Case Detail</h3>
+              <p id="analyzeCaseMeta" class="muted small"></p>
+              <h4>Evaluator Reasoning</h4>
+              <pre id="analyzeReasoning">-</pre>
+              <h4>Trace Waterfall</h4>
+              <ol id="analyzeTrace" class="trace-list"></ol>
+            </article>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

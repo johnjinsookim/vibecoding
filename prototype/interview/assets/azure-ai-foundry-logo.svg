@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <linearGradient id="topBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#50E6FF"/>
+      <stop offset="100%" stop-color="#0078D4"/>
+    </linearGradient>
+    <linearGradient id="midBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0078D4"/>
+      <stop offset="100%" stop-color="#003A8C"/>
+    </linearGradient>
+    <linearGradient id="lightBlue" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#50E6FF"/>
+      <stop offset="100%" stop-color="#1E90FF"/>
+    </linearGradient>
+    <linearGradient id="accentBlue" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0078D4"/>
+      <stop offset="100%" stop-color="#50E6FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Back-left panel -->
+  <polygon points="30,75 100,38 100,110 30,148" fill="url(#midBlue)"/>
+
+  <!-- Back-right panel -->
+  <polygon points="100,38 170,75 170,148 100,110" fill="url(#lightBlue)"/>
+
+  <!-- Front-bottom panel (lower left) -->
+  <polygon points="30,148 100,110 100,165 55,185" fill="url(#accentBlue)" opacity="0.9"/>
+
+  <!-- Front-bottom panel (lower right) -->
+  <polygon points="100,110 170,148 145,185 100,165" fill="url(#topBlue)" opacity="0.85"/>
+
+  <!-- Top cap -->
+  <polygon points="30,75 100,38 170,75 100,113" fill="url(#topBlue)" opacity="0.95"/>
+
+  <!-- Inner highlight lines for depth -->
+  <line x1="100" y1="38" x2="100" y2="165" stroke="white" stroke-width="1" opacity="0.2"/>
+  <line x1="30" y1="75" x2="170" y2="75" stroke="white" stroke-width="0.8" opacity="0.12"/>
+  <line x1="30" y1="148" x2="170" y2="148" stroke="white" stroke-width="0.8" opacity="0.12"/>
+</svg>

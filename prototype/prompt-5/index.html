@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prompt-5 | Pricing Reliability Workspace</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">arize</div>
+        <nav>
+          <p class="nav-label">Observe</p>
+          <a class="nav-item" data-view="dashboard" href="#">Dashboards</a>
+          <a class="nav-item" data-view="monitors" href="#">Monitors</a>
+        </nav>
+        <nav>
+          <p class="nav-label">Evaluate</p>
+          <a class="nav-item" data-view="evals" href="#">Evals &amp; Tasks</a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <p class="crumb">Demo Model / Demo Model Manager</p>
+            <h1 id="pageTitle">Dashboards <span id="pageSubtitle">Pricing hallucination observability</span></h1>
+          </div>
+          <button id="refreshBtn" class="btn btn-primary">Refresh Sample Data</button>
+        </header>
+
+        <section id="view-dashboard" class="view card">
+          <div class="filters">
+            <select id="dashWindow">
+              <option value="24">Last 24 hours</option>
+              <option value="72">Last 3 days</option>
+              <option value="168">Last 7 days</option>
+            </select>
+            <select id="dashService">
+              <option value="all">All Services</option>
+            </select>
+            <select id="dashSource">
+              <option value="all">All Sources</option>
+              <option value="system">System Flagged</option>
+              <option value="user">User Denoted</option>
+            </select>
+            <select id="dashSeverity">
+              <option value="all">All Severity</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+
+          <section class="kpi-row">
+            <article class="kpi-card"><p>Total Responses</p><strong id="kpiResponses">0</strong></article>
+            <article class="kpi-card"><p>Total Issues</p><strong id="kpiIssues">0</strong></article>
+            <article class="kpi-card"><p>Issue Rate</p><strong id="kpiIssueRate">0%</strong></article>
+            <article class="kpi-card"><p>Coverage</p><strong id="kpiCoverage">0%</strong></article>
+          </section>
+
+          <section class="detail-grid one-col">
+            <article class="chart-panel">
+              <div class="chart-head">
+                <p>Issue Trend (system vs user)</p>
+                <span id="trendMeta" class="pill healthy">0 bins</span>
+              </div>
+              <svg id="dashboardTrend" viewBox="0 0 900 240" role="img" aria-label="Issue trend"></svg>
+            </article>
+          </section>
+
+          <section class="detail-grid">
+            <article class="card detail-panel compact">
+              <h3>Issue Class Breakdown</h3>
+              <div id="dashBreakdown" class="alert-feed"></div>
+            </article>
+            <article class="card detail-panel compact">
+              <h3>Recent Issue Events</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Time</th>
+                      <th>Service</th>
+                      <th>Issue</th>
+                      <th>Source</th>
+                      <th>Severity</th>
+                    </tr>
+                  </thead>
+                  <tbody id="dashEventsBody"></tbody>
+                </table>
+              </div>
+            </article>
+          </section>
+        </section>
+
+        <section id="view-monitors" class="view card hidden">
+          <section class="monitoring-panel">
+            <div class="filters">
+              <input id="searchInput" type="text" placeholder="Search by monitor or service name" />
+              <select id="statusFilter">
+                <option value="all">All Statuses</option>
+                <option value="healthy">Healthy</option>
+                <option value="triggered">Triggered</option>
+                <option value="paused">Paused</option>
+              </select>
+              <select id="typeFilter">
+                <option value="all">All Monitor Types</option>
+                <option value="threshold">Threshold</option>
+                <option value="anomaly">Anomaly</option>
+              </select>
+              <button id="simulateSpikeBtn" class="btn">Simulate Incident</button>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Service</th>
+                    <th>Type</th>
+                    <th>Threshold</th>
+                    <th>Current</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="monitorTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="detail-grid">
+            <article class="card detail-panel">
+              <div class="detail-head">
+                <div>
+                  <p class="detail-eyebrow">Selected Monitor</p>
+                  <h2 id="selectedName">Issue Rate Monitor</h2>
+                  <p id="selectedMeta" class="muted">issue_rate | rufus-prod</p>
+                </div>
+                <a id="selectedInvestigation" class="btn btn-small" href="#" target="_blank" rel="noreferrer">View Traces</a>
+              </div>
+
+              <div class="chart-panel">
+                <div class="chart-head">
+                  <p>Monitor Signal (24h)</p>
+                  <span id="selectedStatusPill" class="pill healthy">Healthy</span>
+                </div>
+                <svg id="metricChart" viewBox="0 0 800 240" role="img" aria-label="Monitor trend chart"></svg>
+                <p id="chartLegend" class="muted"></p>
+              </div>
+
+              <div class="alert-feed" id="alertFeed"></div>
+            </article>
+
+            <aside class="card settings-panel">
+              <h3>Create Monitor</h3>
+              <form id="createMonitorForm">
+                <label>
+                  Service
+                  <select id="monitorService"></select>
+                </label>
+                <label>
+                  Monitor Name
+                  <input id="monitorName" type="text" required />
+                </label>
+                <label>
+                  Monitor Type
+                  <select id="monitorType">
+                    <option value="threshold">Threshold</option>
+                    <option value="anomaly">Anomaly</option>
+                  </select>
+                </label>
+                <label>
+                  Threshold (%)
+                  <input id="monitorThreshold" type="number" min="0.1" max="100" step="0.1" value="8" required />
+                </label>
+                <label>
+                  Investigation Link
+                  <input id="monitorInvestigationLink" type="url" value="https://observability.internal/traces" required />
+                </label>
+                <div class="actions">
+                  <button id="resetFormBtn" type="button" class="btn">Reset</button>
+                  <button type="submit" class="btn btn-primary">Create Monitor</button>
+                </div>
+                <p id="formMessage" class="muted"></p>
+              </form>
+            </aside>
+          </section>
+        </section>
+
+        <section id="view-evals" class="view card hidden">
+          <section class="monitoring-panel">
+            <div class="filters">
+              <input id="evalSearch" type="text" placeholder="Search evaluator or service" />
+              <button id="simulateEvalBtn" class="btn">Simulate Eval Run</button>
+            </div>
+
+            <div class="detail-grid">
+              <article class="card detail-panel compact">
+                <h3>Evaluators</h3>
+                <div id="evalList" class="alert-feed"></div>
+              </article>
+              <article class="card detail-panel compact">
+                <h3>Recent Eval Records</h3>
+                <div class="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Timestamp</th>
+                        <th>Evaluator</th>
+                        <th>Service</th>
+                        <th>Outcome</th>
+                        <th>Issue Class</th>
+                      </tr>
+                    </thead>
+                    <tbody id="evalRecordsBody"></tbody>
+                  </table>
+                </div>
+              </article>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

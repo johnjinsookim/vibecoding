@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clinical Safety Analytics Dashboard</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-row">
+          <div class="brand-dot"></div>
+          <h1>Clinical Safety Analytics Dashboard</h1>
+        </div>
+        <div class="toolbar">
+          <button class="tool-btn">All Versions</button>
+          <button class="tool-btn">Evaluators 3</button>
+          <button class="tool-btn tool-btn-primary">+ Production Log</button>
+        </div>
+      </header>
+
+      <main>
+        <section id="screen-dashboard" class="screen">
+          <section class="filters-row">
+            <input id="searchInput" class="search" type="text" placeholder="Search Production Logs..." />
+            <button id="clearFilterBtn" class="tool-btn">Clear Filter</button>
+            <span id="activeFilterPill" class="pill">Filter: none</span>
+          </section>
+
+          <section class="chart-grid">
+            <article class="card chart-card">
+              <h2>Security (24H)</h2>
+              <div id="chart-security" class="chart-bars"></div>
+            </article>
+            <article class="card chart-card">
+              <h2>Governance (24H)</h2>
+              <div id="chart-governance" class="chart-bars"></div>
+            </article>
+            <article class="card chart-card">
+              <h2>Harmful (24H)</h2>
+              <div id="chart-harmful" class="chart-bars"></div>
+            </article>
+          </section>
+
+          <section class="card summary-card">
+            <div class="summary-head">
+              <h2>Production Logs</h2>
+              <span id="rowCountPill" class="pill">0 logs</span>
+            </div>
+
+            <div class="summary-metrics">
+              <article class="metric-box">
+                <p>Total Incidents</p>
+                <strong id="metric-total">0</strong>
+              </article>
+              <article class="metric-box">
+                <p>Blocked</p>
+                <strong id="metric-blocked">0</strong>
+              </article>
+              <article class="metric-box">
+                <p>Regenerated</p>
+                <strong id="metric-regenerated">0</strong>
+              </article>
+              <article class="metric-box">
+                <p>P50 Latency</p>
+                <strong id="metric-p50">0ms</strong>
+              </article>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Production Log</th>
+                    <th>Security</th>
+                    <th>Governance</th>
+                    <th>Harmful</th>
+                    <th>P50 Latency</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="summaryTableBody"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+
+        <section id="screen-investigation" class="screen hidden">
+          <section class="investigation-head">
+            <button id="backBtn" class="tool-btn">Back to Dashboard</button>
+            <span id="investigationMeta" class="pill">No event selected</span>
+          </section>
+
+          <section class="investigation-grid">
+            <article class="card">
+              <h2>Production Log Events</h2>
+              <p class="subtle">Hover to preview. Click to inspect.</p>
+              <ul id="eventList" class="event-list"></ul>
+            </article>
+
+            <article class="card">
+              <h2 id="eventTitle">Event Investigation</h2>
+              <div id="eventGraph" class="event-graph empty">Select an event to render the flow.</div>
+              <div id="fixPanel" class="fix-panel"></div>
+            </article>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

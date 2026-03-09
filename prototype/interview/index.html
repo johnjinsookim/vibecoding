@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foundry - Create Your Evals</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="side-rail" aria-label="Primary navigation">
+        <img class="brand-logo" src="./assets/azure-ai-foundry-logo.svg" alt="Azure AI Foundry" />
+        <div class="rail-nav" aria-label="Navigation items">
+          <a class="nav-item nav-item-active" href="./index.html" aria-label="Evaluations">
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 19H20" />
+                <path d="M7 16V10" />
+                <path d="M12 16V6" />
+                <path d="M17 16V12" />
+              </svg>
+            </span>
+            <span class="nav-label">Evaluations</span>
+          </a>
+          <a class="nav-item" href="./deployment-center.html" aria-label="Deployment Center">
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 8L12 4L20 8L12 12L4 8Z" />
+                <path d="M4 12L12 16L20 12" />
+                <path d="M4 16L12 20L20 16" />
+              </svg>
+            </span>
+            <span class="nav-label">Deployment Center</span>
+          </a>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <section class="landing-shell">
+          <header class="landing-head">
+            <h1>Evaluations</h1>
+            <p>Customize evaluations for your agents with AI</p>
+          </header>
+
+          <section class="landing-card" aria-label="Eval setup">
+            <div class="tab-row" role="tablist" aria-label="Context type">
+              <button id="typeRepoBtn" class="tab-btn active" type="button">GitHub repo</button>
+              <button id="typeSpecBtn" class="tab-btn" type="button">Agent specification</button>
+            </div>
+
+            <div class="input-group">
+              <input
+                id="contextInput"
+                type="text"
+                placeholder="https://github.com/username/repo"
+                aria-label="Repository or agent specification input"
+              />
+              <p id="inputHint" class="input-hint">
+                We'll analyze your codebase and generate relevant test cases and evaluation criteria.
+              </p>
+            </div>
+
+            <button id="generateBtn" class="primary-btn generate-btn" type="button" disabled>
+              Generate
+            </button>
+            <p id="loadingHint" class="loading-hint hidden">This usually takes 30-60 seconds.</p>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

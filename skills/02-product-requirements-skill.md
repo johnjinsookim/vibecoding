@@ -20,8 +20,8 @@ Core pain point.
 **Why now?**  
 Strategic reason.
 
-**Expected impact:**  
-North Star Metric, and why this metric was picked.
+**North Star:**  
+North Star Metric, and how it's defined.
 
 ---
 
@@ -38,12 +38,37 @@ North Star Metric, and why this metric was picked.
 
 ---
 
-# 3. Goals & Non-Goals
+# 4. User Experience
 
-## Goals (Must Be Measurable)
-- Goal 1 (e.g., Increase X from A → B)
-- Goal 2
-- Goal 3
+## Before vs After
+How does the experience improve?
+
+## Core User Flow
+Step-by-step:
+1.
+2.
+3.
+4.
+
+---
+
+# 5. Solution Overview
+
+## What Are We Building?
+High-level description.
+
+## Key Features (MVP)
+- Feature 1: high-level overview, then list detailed user stories and acceptance criteria
+- Feature 2: high-level overview, then list detailed user stories and acceptance criteria
+- Feature 3: high-level overview, then list detailed user stories and acceptance criteria
+
+---
+
+# 6. Scope
+
+## Goals
+- Which pain points are we prioritizing
+- Which features are in scope
 
 ## Non-Goals
 - Explicitly out of scope
@@ -51,7 +76,7 @@ North Star Metric, and why this metric was picked.
 
 ---
 
-# 4. Success Metrics
+# 7. Success Metrics
 
 ## Primary Metric (North Star)
 - What single metric best measures success?
@@ -67,44 +92,6 @@ North Star Metric, and why this metric was picked.
 
 ---
 
-# 5. User Experience
-
-## Core User Flow
-Step-by-step:
-1.
-2.
-3.
-4.
-
-## Before vs After
-How does the experience improve?
-
----
-
-# 6. Solution Overview
-
-## What Are We Building?
-High-level description.
-
-## Key Features (MVP)
-- Feature 1: high-level overview, then list detailed user stories and acceptance criteria
-- Feature 2: high-level overview, then list detailed user stories and acceptance criteria
-- Feature 3: high-level overview, then list detailed user stories and acceptance criteria
-
-Each feature should clearly tie to a goal.
-
----
-
-# 7. Scope
-
-## In Scope (MVP)
-Bullet list.
-
-## Out of Scope
-Bullet list.
-
----
-
 # 8. Risks & Tradeoffs
 
 ## Key Risks
@@ -115,14 +102,6 @@ Bullet list.
 ## Tradeoffs
 - What alternatives did we consider?
 - Why this approach?
-
----
-
-# 9. Rollout Plan
-
-- Experiment or full launch?
-- How do we measure success?
-- What happens if it fails?
 
 ---
 
